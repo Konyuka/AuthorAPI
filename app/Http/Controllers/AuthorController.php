@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Author;
+use App\Models\Author;
 use Illuminate\Http\Request;
 
 class AuthorController extends Controller
@@ -18,8 +18,13 @@ class AuthorController extends Controller
 
     public function create(Request $request)
     {
-        $author = Author::create($request->all());
+        $this->validate($request, [
+            'name' => 'required',
+            'email' => 'required|email|unique:authors',
+            'location' => 'required|alpha'
+        ]);
 
+        $author = Author::create($request->all());
         return response()->json($author, 201);
     }
 
