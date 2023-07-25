@@ -18,6 +18,12 @@ $router->get('/', function () use ($router) {
 });
 
 $router->group(['prefix' => 'api'], function () use ($router) {
+
+
+  $router->get('posts',  ['uses' => 'postsController@index']);
+
+
+
   $router->get('authors',  ['uses' => 'AuthorController@showAllAuthors']);
 
   $router->get('authors/{id}', ['uses' => 'AuthorController@showOneAuthor']);
