@@ -16,7 +16,9 @@ class postsController extends Controller
      */
     public function index()
     {
-        return response()->json(post::all());
+
+        $posts = Post::latest()->get();
+        return response()->json($posts);
     }
 
     /**
